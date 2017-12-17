@@ -1,5 +1,5 @@
 {
-  "name": "@ecliptic/bs-tools",
+  "name": "@ecliptic/bucklescript-tools",
   "version": "0.1.0",
   "private": true,
   "workspaces": ["packages/*"],

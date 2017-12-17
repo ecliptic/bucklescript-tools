@@ -1,5 +1,5 @@
 {
-  "name": "@ecliptic/bs-chalk",
+  "name": "bs-chalk",
   "version": "0.1.0",
   "description": "BuckleScript interface to the node 'chalk' library",
   "main": "index.js",

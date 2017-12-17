@@ -1,5 +1,5 @@
 {
-  "name": "@ecliptic/bs-chalk",
+  "name": "bs-chalk",
   "sources": [
     {
       "dir": "src",
@@ -10,6 +10,6 @@
   "reason": {
     "react-jsx": 2
   },
-  "bsc-flags": ["-bs-super-errors"],
+  "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
   "refmt": 3
 }
