@@ -1,8 +1,11 @@
 open Js.Promise;
 
-let debug = ErrorUtils.Debug.make("DbUtils");
+let getEnvVar = (key, fallback) =>
+  Js.Option.getWithDefault(fallback, Js.Dict.get(Node.Process.process##env, key));
 
-let debugExn = ErrorUtils.Debug.make("DbUtils:exn");
+let debug = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils");
+
+let debugExn = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils:exn");
 
 type host = {. "host": string, "port": Js.Nullable.t(string)};
 
@@ -22,6 +25,8 @@ type config = {
 
 [@bs.module] external parseDbUrl : string => config = "parse-database-url";
 
+[@bs.new] external makeError : string => exn = "Error";
+
 /* Database Exceptions */
 /** Retrieve the "code" from a database exception */ [@bs.get]
 external exnCode : Js.Promise.error => Js.Nullable.t(string) =
@@ -39,6 +44,18 @@ let invalidTextRepresentation = "22P02";
 
 let uniqueViolation = "23505";
 
+/**
+ * Safely converts an object to json by stringifying it and parsing the results.
+ */
+let objToJson = (obj: Js.t('a)) : Js.Json.t => {
+  let str = Js.Json.stringifyAny(obj);
+  /* parseExn should be safe because the string came from stringifyAny */
+  switch str {
+  | Some(str) => str |> Js.Json.parseExn
+  | None => Js.Json.null
+  }
+};
+
 /*
  * Pass-through error handlers - handles a specific error, letting all the rest flow through to the
  * next handler.
@@ -48,7 +65,7 @@ let handleUniqueError = (~name: string, ~message: string, promise) =>
   promise
   |> catch(
        (exn) => {
-         let continue = reject(toExn(exn));
+         let continue = reject(Debug.toExn(exn));
          let codeOpt = exn |> exnCode |> Js.Nullable.to_opt;
          switch codeOpt {
          | Some(code) =>
@@ -107,3 +124,14 @@ let handleDbErrors = (promise) =>
          }
        }
      );
+
+let decodeResults = (~decoder: Js.Json.t => 'a, results: array('row)) =>
+  results |> Js.Array.map(objToJson) |> Js.Array.map(decoder) |> Js.Promise.resolve;
+
+let rejectIfEmpty = (~decoder, ~error, results) =>
+  switch results {
+  | [||] => Js.Promise.reject(makeError(error))
+  | results => decodeResults(~decoder, results)
+  };
+
+let pickFirst = (results) => Js.Promise.resolve(results[0]);

@@ -22,8 +22,8 @@
   "keywords": [
     "bucklescript",
     "reason",
-    "chalk",
-    "node"
+    "node",
+    "debug"
   ],
   "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
   "license": "BSD-2-Clause",

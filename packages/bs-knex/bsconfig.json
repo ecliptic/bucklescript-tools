@@ -1,0 +1,15 @@
+{
+  "name": "bs-knex",
+  "sources": [
+    {
+      "dir": "src",
+      "subdirs": true
+    }
+  ],
+  "bs-dependencies": ["bs-node-debug"],
+  "reason": {
+    "react-jsx": 2
+  },
+  "bsc-flags": ["-bs-no-version-header", "-bs-super-errors"],
+  "refmt": 3
+}

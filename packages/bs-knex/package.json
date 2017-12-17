@@ -1,7 +1,7 @@
 {
-  "name": "bs-chalk",
+  "name": "bs-knex",
   "version": "0.1.0",
-  "description": "BuckleScript interface to the node 'chalk' library",
+  "description": "BuckleScript interface to the node 'knex' library",
   "main": "index.js",
   "scripts": {
     "precommit": "lint-staged",
@@ -23,8 +23,9 @@
     "bucklescript",
     "reason",
     "node",
-    "color",
-    "chalk"
+    "database",
+    "sql",
+    "knex"
   ],
   "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
   "license": "BSD-2-Clause",
@@ -33,7 +34,8 @@
   },
   "homepage": "https://github.com/ecliptic/bucklescript-tools#readme",
   "dependencies": {
-    "chalk": "^2.3.0"
+    "bs-node-debug": "^0.1.0",
+    "knex": "^0.14.2"
   },
   "devDependencies": {
     "bs-jest": "^0.2.0",
