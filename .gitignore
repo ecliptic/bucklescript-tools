@@ -67,5 +67,5 @@ build
 .merlin
 
 # Compiled files
-lib/*
-!lib/js
+packages/**/lib/*
+!packages/**/lib/js

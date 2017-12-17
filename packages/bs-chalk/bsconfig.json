@@ -6,15 +6,7 @@
       "subdirs": true
     }
   ],
-  "bs-dependencies": [
-    "bs-json",
-    "bs-graphql",
-    "bs-graphql-tools",
-    "bs-express",
-    "bs-apollo-server-express",
-    "bs-jest",
-    "bs-batteries"
-  ],
+  "bs-dependencies": [],
   "reason": {
     "react-jsx": 2
   },
