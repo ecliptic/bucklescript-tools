@@ -19,7 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/ecliptic/bucklescript-tools.git"
   },
-  "keywords": ["bucklescript", "reason", "node", "graphql", "apollo", "scalar"],
+  "keywords": [
+    "bucklescript",
+    "reason",
+    "node",
+    "graphql",
+    "apollo",
+    "scalar"
+  ],
   "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
   "license": "BSD-2-Clause",
   "bugs": {
@@ -27,7 +34,8 @@
   },
   "homepage": "https://github.com/ecliptic/bucklescript-tools#readme",
   "dependencies": {
-    "bs-express": "^0.0.5"
+    "bs-express": "^0.0.5",
+    "express-promise-router": "^2.0.0"
   },
   "devDependencies": {
     "bs-jest": "^0.2.0",
@@ -50,11 +58,14 @@
     "prettier-eslint-cli": "^4.4.0"
   },
   "jest": {
-    "moduleFileExtensions": ["re", "js", "ml"],
+    "moduleFileExtensions": [
+      "re",
+      "js",
+      "ml"
+    ],
     "testURL": "http://localhost",
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css)$":
-        "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css)$": "identity-obj-proxy"
     },
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
@@ -66,7 +77,13 @@
     }
   },
   "lint-staged": {
-    "src/**/*.js": ["format", "git add"],
-    "src/**/*.re": ["format.re", "git add"]
+    "src/**/*.js": [
+      "format",
+      "git add"
+    ],
+    "src/**/*.re": [
+      "format.re",
+      "git add"
+    ]
   }
 }
