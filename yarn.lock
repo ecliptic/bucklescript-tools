@@ -430,6 +430,10 @@ browser-resolve@^1.11.2:
   dependencies:
     resolve "1.1.7"
 
+bs-graphql@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/bs-graphql/-/bs-graphql-0.3.1.tgz#799a56554dafa362b18beba8f30ba94eb450d8f0"
+
 bs-jest@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/bs-jest/-/bs-jest-0.2.0.tgz#62576e00c35f069d7681b9bb9bfd744dc7197eb7"
@@ -1431,6 +1435,12 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
 
+graphql@^0.12.3:
+  version "0.12.3"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.12.3.tgz#11668458bbe28261c0dcb6e265f515ba79f6ce07"
+  dependencies:
+    iterall "1.1.3"
+
 growly@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
@@ -1920,6 +1930,10 @@ istanbul-reports@^1.1.3:
   resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.1.3.tgz#3b9e1e8defb6d18b1d425da8e8b32c5a163f2d10"
   dependencies:
     handlebars "^4.0.3"
+
+iterall@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
 
 jest-changed-files@^21.2.0:
   version "21.2.0"
