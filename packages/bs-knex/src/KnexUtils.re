@@ -117,10 +117,8 @@ let handleDbErrors = (promise) =>
              debugExn(exn);
              reject(makeError("A database error occurred."))
            }
-         | None =>
-           debug("Unhandled error:");
-           debugExn(exn);
-           reject(makeError("A database error occurred."))
+         /* There's no "code" property on the error, so this isn't a Knex DB error */
+         | None => reject(Debug.toExn(exn))
          }
        }
      );
