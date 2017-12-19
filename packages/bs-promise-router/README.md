@@ -5,7 +5,14 @@ A BuckleScript interface to [express-promise-router](https://www.npmjs.com/packa
 ## Example
 
 ```reason
+let heartbeat = (_, res: Express.Response.t) => {
+  Express.Response.sendString(res, "ok") |> ignore;
+  Js.Promise.resolve(Js.undefined)
+};
+
 let router = PromiseRouter.make();
-PromiseRouter.get(router, ~path="/", HttpUtils.heartbeat);
+
+PromiseRouter.get(router, ~path="/", heartbeat);
+
 Express.App.use(app, asMiddleware(router));
 ```
