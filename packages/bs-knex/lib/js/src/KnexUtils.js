@@ -51,9 +51,7 @@ function handleDbErrors(promise) {
   return promise.catch((function (exn) {
                 var codeOpt = exn.code;
                 if (codeOpt == null) {
-                  debug("Unhandled error:");
-                  debugExn(exn);
-                  return Promise.reject(new Error("A database error occurred."));
+                  return Promise.reject(exn);
                 } else if (codeOpt === uniqueViolation) {
                   return Promise.reject(new Error("A unique constraint was violated."));
                 } else if (codeOpt === invalidTextRepresentation) {
