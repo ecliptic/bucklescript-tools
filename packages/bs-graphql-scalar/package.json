@@ -1,6 +1,6 @@
 {
   "name": "bs-graphql-scalar",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "BuckleScript interface to create GraphQL Custom Scalar types",
   "main": "index.js",
   "scripts": {
