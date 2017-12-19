@@ -1,12 +1,12 @@
 type query;
 
-type t('options, 'a) = [@bs] ((string, 'options) => query);
+type t('options) = [@bs] ((string, 'options) => query);
 
 external toPromise : query => Js.Promise.t('a) = "%identity";
 
-[@bs.module] external make : 'connectionOpts => t('options, 'a) = "knex";
+[@bs.module] external make : 'connectionOpts => t('options) = "knex";
 
-[@bs.send] external raw : (t('options, 'a), string) => Js.Promise.t('b) = "";
+[@bs.send] external raw : (t('options), string) => Js.Promise.t('b) = "";
 
 /* Query Interface */
 [@bs.send.pipe : query] external select : 'a => query = "";
