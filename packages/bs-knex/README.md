@@ -24,7 +24,8 @@ let knex = Knex.make({
 
 let users = [@bs] knex("users", Js.Nullable.null);
 
-users
+let promise = (user: Js.t('a)) =>
+  users
   |> insert({
         "user_name": user##userName,
         "display_name": user##displayName,
