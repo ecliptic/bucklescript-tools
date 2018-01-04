@@ -1,194 +1,208 @@
-type query;
+type queryBuilder;
 
-type t('options) = [@bs] ((string, 'options) => query);
+type t = string => queryBuilder;
 
-external toPromise : query => Js.Promise.t('a) = "%identity";
+external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
-[@bs.module] external make : 'connectionOpts => t('options) = "knex";
+[@bs.module] external make : KnexConfig.t => t = "knex";
 
-[@bs.send] external raw : (t('options), string) => Js.Promise.t('b) = "";
+[@bs.send] external raw : (t, string) => Js.Promise.t('b) = "";
 
-/* Query Interface */
-[@bs.send.pipe : query] external select : 'a => query = "";
+/* QueryBuilder Interface */
+[@bs.send.pipe : queryBuilder] external select : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external as_ : 'a => query = "as";
+[@bs.send.pipe : queryBuilder] external as_ : 'a => queryBuilder = "as";
 
-[@bs.send.pipe : query] external columns : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external columns : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external column : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external column : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external from : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external from : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external into : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external into : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external table : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external table : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external distinct : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external distinct : 'a => queryBuilder = "";
 
 /* Joins */
-[@bs.send.pipe : query] external join : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external join : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external joinRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external joinRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external innerJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external innerJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external leftJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external leftJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external leftOuterJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external leftOuterJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external rightJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external rightJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external rightOuterJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external rightOuterJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external outerJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external outerJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external fullOuterJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external fullOuterJoin : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external crossJoin : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external crossJoin : 'a => queryBuilder = "";
 
 /* Withs */
-[@bs.send.pipe : query] external with_ : 'a => query = "with";
+[@bs.send.pipe : queryBuilder] external with_ : 'a => queryBuilder = "with";
 
-[@bs.send.pipe : query] external withRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external withRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external withSchema : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external withSchema : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external withWrapped : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external withWrapped : 'a => queryBuilder = "";
 
 /* Wheres */
-[@bs.send.pipe : query] external where : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external where : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external andWhere : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andWhere : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhere : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhere : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNot : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNot : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external andWhereNot : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andWhereNot : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNot : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNot : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external andWhereRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andWhereRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereWrapped : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereWrapped : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external havingWrapped : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external havingWrapped : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereExists : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereExists : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereExists : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereExists : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNotExists : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNotExists : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNotExists : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNotExists : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereIn : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereIn : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereIn : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereIn : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNotIn : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNotIn : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNotIn : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNotIn : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNull : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNull : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNull : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNull : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNotNull : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNotNull : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNotNull : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNotNull : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereBetween : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereBetween : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external andWhereBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andWhereBetween : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external whereNotBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external whereNotBetween : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orWhereNotBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orWhereNotBetween : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external andWhereNotBetween : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andWhereNotBetween : 'a => queryBuilder = "";
 
 /* Group By */
-[@bs.send.pipe : query] external groupBy : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external groupBy : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external groupByRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external groupByRaw : 'a => queryBuilder = "";
 
 /* Order By */
-[@bs.send.pipe : query] external orderBy : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orderBy : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external orderByRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external orderByRaw : 'a => queryBuilder = "";
 
 /* Union */
+[@bs.send.pipe : queryBuilder] external union : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external union : 'a => query = "";
-
-[@bs.send.pipe : query] external unionAll : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external unionAll : 'a => queryBuilder = "";
 
 /* Having */
+[@bs.send.pipe : queryBuilder] external having : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external having : 'a => query = "";
-[@bs.send.pipe : query] external andHaving : 'a => query = "";
-[@bs.send.pipe : query] external havingRaw : 'a => query = "";
-[@bs.send.pipe : query] external orHaving : 'a => query = "";
-[@bs.send.pipe : query] external orHavingRaw : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external andHaving : 'a => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external havingRaw : 'a => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external orHaving : 'a => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external orHavingRaw : 'a => queryBuilder = "";
 
 /* Clear */
+[@bs.send.pipe : queryBuilder] external clearSelect : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external clearSelect : 'a => query = "";
-[@bs.send.pipe : query] external clearWhere : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external clearWhere : 'a => queryBuilder = "";
 
 /* Paging */
+[@bs.send.pipe : queryBuilder] external offset : int => queryBuilder = "";
 
-[@bs.send.pipe : query] external offset : int => query = "";
-[@bs.send.pipe : query] external limit : int => query = "";
+[@bs.send.pipe : queryBuilder] external limit : int => queryBuilder = "";
 
 /* Aggregation */
+[@bs.send.pipe : queryBuilder] external count : Js.Nullable.t(string) => queryBuilder = "";
 
-[@bs.send.pipe : query] external count : (Js.Nullable.t(string)) => query = "";
-[@bs.send.pipe : query] external countDistinct : (Js.Nullable.t(string)) => query = "";
-[@bs.send.pipe : query] external min : (string) => query = "";
-[@bs.send.pipe : query] external max : (string) => query = "";
-[@bs.send.pipe : query] external sum : (string) => query = "";
-[@bs.send.pipe : query] external sumDistinct : (string) => query = "";
-[@bs.send.pipe : query] external avg : (string) => query = "";
-[@bs.send.pipe : query] external avgDistinct : (string) => query = "";
-[@bs.send.pipe : query] external increment : (string, Js.Nullable.t(int)) => query = "";
-[@bs.send.pipe : query] external decrement : (string, Js.Nullable.t(int)) => query = "";
+[@bs.send.pipe : queryBuilder] external countDistinct : Js.Nullable.t(string) => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external min : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external max : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external sum : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external sumDistinct : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external avg : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external avgDistinct : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external increment : (string, Js.Nullable.t(int)) => queryBuilder =
+  "";
+
+[@bs.send.pipe : queryBuilder] external decrement : (string, Js.Nullable.t(int)) => queryBuilder =
+  "";
 
 /* Others */
+[@bs.send.pipe : queryBuilder] external first : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external first : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external debug : Js.boolean => queryBuilder = "";
 
-[@bs.send.pipe : query] external debug : Js.boolean => query = "";
+[@bs.send.pipe : queryBuilder] external pluck : string => queryBuilder = "";
 
-[@bs.send.pipe : query] external pluck : string => query = "";
+[@bs.send.pipe : queryBuilder] external insert_ : ('a, Js.Nullable.t(string)) => queryBuilder =
+  "insert";
 
-[@bs.send.pipe : query] external insert_ : ('a, Js.Nullable.t(string)) => query = "insert";
+[@bs.send.pipe : queryBuilder] external update_ : ('a, Js.Nullable.t(string)) => queryBuilder =
+  "update";
 
-[@bs.send.pipe : query] external update_ : ('a, Js.Nullable.t(string)) => query = "update";
+[@bs.send.pipe : queryBuilder]
+external updateSet : (string, 'a, Js.Nullable.t(string)) => queryBuilder =
+  "update";
 
-[@bs.send.pipe : query] external updateSet : (string, 'a, Js.Nullable.t(string)) => query = "update";
+[@bs.send.pipe : queryBuilder] external returning : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external returning : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external del_ : ('a, Js.Nullable.t(string)) => queryBuilder = "del";
 
-[@bs.send.pipe : query] external del_ : ('a, Js.Nullable.t(string)) => query = "del";
+[@bs.send.pipe : queryBuilder] external truncate : unit => queryBuilder = "";
 
-[@bs.send.pipe : query] external truncate : unit => query = "";
+[@bs.send.pipe : queryBuilder] external transacting : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external transacting : 'a => query = "";
+[@bs.send.pipe : queryBuilder] external connection : 'a => queryBuilder = "";
 
-[@bs.send.pipe : query] external connection : 'a => query = "";
-
-[@bs.send.pipe : query] external clone : unit => query = "";
+[@bs.send.pipe : queryBuilder] external clone : unit => queryBuilder = "";
 
 /* Convenience Functions */
-
 let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.from_opt(returning));
 
 let update = (~returning=Some("*"), data) => update_(data, Js.Nullable.from_opt(returning));

@@ -7,23 +7,7 @@ let debug = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils");
 
 let debugExn = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils:exn");
 
-type host = {. "host": string, "port": Js.Nullable.t(string)};
-
-type config = {
-  .
-  "driver": string,
-  "user": Js.Nullable.t(string),
-  "password": Js.Nullable.t(string),
-  "host": Js.Nullable.t(string),
-  "hosts": Js.Nullable.t(array(host)),
-  "port": Js.Nullable.t(string),
-  "database": Js.Nullable.t(string),
-  "filename": Js.Nullable.t(string),
-  "native": Js.Nullable.t(Js.boolean),
-  "reconnect": Js.Nullable.t(Js.boolean)
-};
-
-[@bs.module] external parseDbUrl : string => config = "parse-database-url";
+[@bs.module] external parseDbUrl : string => KnexConfig.db = "parse-database-url";
 
 [@bs.new] external makeError : string => exn = "Error";
 
@@ -47,14 +31,22 @@ let uniqueViolation = "23505";
 /**
  * Safely converts an object to json by stringifying it and parsing the results.
  */
-let objToJson = (obj: Js.t('a)) : Js.Json.t => {
-  let str = Js.Json.stringifyAny(obj);
-  /* parseExn should be safe because the string came from stringifyAny */
-  switch str {
-  | Some(str) => str |> Js.Json.parseExn
-  | None => Js.Json.null
-  }
-};
+let objToJson = (obj: Js.t('a)) : Js.Json.t =>
+  Js.Option.(
+    Js.Json.(
+      stringifyAny(obj)
+      |> andThen(
+           [@bs]
+           (
+             (str) =>
+               try (str |> parseExn |> some) {
+               | _exn => None
+               }
+           )
+         )
+      |> getWithDefault(null)
+    )
+  );
 
 /*
  * Pass-through error handlers - handles a specific error, letting all the rest flow through to the
@@ -62,74 +54,78 @@ let objToJson = (obj: Js.t('a)) : Js.Json.t => {
  */
 /** Handles errors for the specified unique constraint */
 let handleUniqueError = (~name: string, ~message: string, promise) =>
-  promise
-  |> catch(
-       (exn) => {
-         let continue = reject(Debug.toExn(exn));
-         let codeOpt = exn |> exnCode |> Js.Nullable.to_opt;
-         switch codeOpt {
-         | Some(code) =>
-           if (code === uniqueViolation) {
-             let constraintOpt = exn |> exnConstraint |> Js.Nullable.to_opt;
-             switch constraintOpt {
-             | Some(constraintName) =>
-               if (constraintName === name) {
-                 reject(makeError(message))
-               } else {
-                 continue
+  Js.Nullable.(
+    promise
+    |> catch(
+         (exn) => {
+           let continue = reject(Debug.toExn(exn));
+           let codeOpt = exn |> exnCode |> to_opt;
+           switch codeOpt {
+           | Some(code) =>
+             if (code === uniqueViolation) {
+               let constraintOpt = exn |> exnConstraint |> to_opt;
+               switch constraintOpt {
+               | Some(constraintName) =>
+                 if (constraintName === name) {
+                   reject(makeError(message))
+                 } else {
+                   continue
+                 }
+               | None => continue
                }
-             | None => continue
+             } else {
+               continue
              }
-           } else {
-             continue
+           | None => continue
            }
-         | None => continue
          }
-       }
-     );
+       )
+  );
 
 /*
  * Terminator error handler - handles all remaining unhandled DB errors
  */
 /** Handle generic database errors */
 let handleDbErrors = (promise) =>
-  promise
-  |> catch(
-       (exn) => {
-         let codeOpt = exn |> exnCode |> Js.Nullable.to_opt;
-         switch codeOpt {
-         | Some(code) =>
-           if (code === uniqueViolation) {
-             reject(makeError("A unique constraint was violated."))
-           } else if (code === invalidTextRepresentation) {
-             let routineOpt = exn |> exnRoutine |> Js.Nullable.to_opt;
-             switch routineOpt {
-             | Some(routine) =>
-               if (routine === "string_to_uuid") {
-                 reject(makeError("The database received an invalid format for a UUID"))
-               } else {
-                 reject(makeError("The database received an invalid text representation."))
+  Js.Nullable.(
+    promise
+    |> catch(
+         (exn) => {
+           let codeOpt = exn |> exnCode |> to_opt;
+           switch codeOpt {
+           | Some(code) =>
+             if (code === uniqueViolation) {
+               reject(makeError("A unique constraint was violated."))
+             } else if (code === invalidTextRepresentation) {
+               let routineOpt = exn |> exnRoutine |> to_opt;
+               switch routineOpt {
+               | Some(routine) =>
+                 if (routine === "string_to_uuid") {
+                   reject(makeError("The database received an invalid format for a UUID"))
+                 } else {
+                   reject(makeError("The database received an invalid text representation."))
+                 }
+               | None => reject(makeError("The database received an invalid text representation."))
                }
-             | None => reject(makeError("The database received an invalid text representation."))
+             } else {
+               debug("Unhandled error:");
+               debugExn(exn);
+               reject(makeError("A database error occurred."))
              }
-           } else {
-             debug("Unhandled error:");
-             debugExn(exn);
-             reject(makeError("A database error occurred."))
+           /* There's no "code" property on the error, so this isn't a Knex DB error */
+           | None => reject(Debug.toExn(exn))
            }
-         /* There's no "code" property on the error, so this isn't a Knex DB error */
-         | None => reject(Debug.toExn(exn))
          }
-       }
-     );
+       )
+  );
 
 let decodeResults = (~decoder: Js.Json.t => 'a, results: array('row)) =>
-  results |> Js.Array.map(objToJson) |> Js.Array.map(decoder) |> Js.Promise.resolve;
+  Js.Array.(results |> map(objToJson) |> map(decoder) |> resolve);
 
 let rejectIfEmpty = (~decoder, ~error, results) =>
   switch results {
-  | [||] => Js.Promise.reject(makeError(error))
+  | [||] => reject(makeError(error))
   | results => decodeResults(~decoder, results)
   };
 
-let pickFirst = (results) => Js.Promise.resolve(results[0]);
+let pickFirst = (results) => resolve(results[0]);

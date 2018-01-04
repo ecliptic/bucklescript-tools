@@ -20,12 +20,14 @@ var invalidTextRepresentation = "22P02";
 var uniqueViolation = "23505";
 
 function objToJson(obj) {
-  var str = JSON.stringify(obj);
-  if (str !== undefined) {
-    return JSON.parse(str);
-  } else {
-    return null;
-  }
+  return Js_option.getWithDefault(null, Js_option.andThen((function (str) {
+                    try {
+                      return Js_option.some(JSON.parse(str));
+                    }
+                    catch (_exn){
+                      return /* None */0;
+                    }
+                  }), Js_primitive.undefined_to_opt(JSON.stringify(obj))));
 }
 
 function handleUniqueError(name, message, promise) {
