@@ -1,13 +1,15 @@
 'use strict';
 
 
-function make(host, user, password, database, $staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, _) {
-  var domain = $staropt$star ? $staropt$star[0] : null;
-  var instanceName = $staropt$star$1 ? $staropt$star$1[0] : null;
-  var debug = $staropt$star$2 ? $staropt$star$2[0] : null;
-  var requestTimeout = $staropt$star$3 ? $staropt$star$3[0] : null;
+function make(host, $staropt$star, user, password, database, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, _) {
+  var port = $staropt$star ? $staropt$star[0] : null;
+  var domain = $staropt$star$1 ? $staropt$star$1[0] : null;
+  var instanceName = $staropt$star$2 ? $staropt$star$2[0] : null;
+  var debug = $staropt$star$3 ? $staropt$star$3[0] : null;
+  var requestTimeout = $staropt$star$4 ? $staropt$star$4[0] : null;
   return {
           host: host,
+          port: port,
           user: user,
           password: password,
           database: database,

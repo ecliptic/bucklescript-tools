@@ -2,6 +2,7 @@ module Connection = {
   type t = {
     .
     "host": string,
+    "port": Js.Nullable.t(string),
     "user": string,
     "password": string,
     "database": string,
@@ -13,6 +14,7 @@ module Connection = {
   let make =
       (
         ~host,
+        ~port=Js.Nullable.null,
         ~user,
         ~password,
         ~database,
@@ -23,6 +25,7 @@ module Connection = {
         ()
       ) => {
     "host": host,
+    "port": port,
     "user": user,
     "password": password,
     "database": database,
