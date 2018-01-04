@@ -14,14 +14,14 @@ module Connection = {
   let make =
       (
         ~host,
-        ~port=Js.Nullable.null,
+        ~port=Js.Nullable.undefined,
         ~user,
         ~password,
         ~database,
-        ~domain=Js.Nullable.null,
-        ~instanceName=Js.Nullable.null,
-        ~debug=Js.Nullable.null,
-        ~requestTimeout=Js.Nullable.null,
+        ~domain=Js.Nullable.undefined,
+        ~instanceName=Js.Nullable.undefined,
+        ~debug=Js.Nullable.undefined,
+        ~requestTimeout=Js.Nullable.undefined,
         ()
       ) => {
     "host": host,
@@ -60,23 +60,23 @@ module Pool = {
   };
   let make =
       (
-        ~name=Js.Nullable.null,
-        ~min=Js.Nullable.null,
-        ~max=Js.Nullable.null,
-        ~refreshIdle=Js.Nullable.null,
-        ~idleTimeoutMillis=Js.Nullable.null,
-        ~reapIntervalMillis=Js.Nullable.null,
-        ~returnToHead=Js.Nullable.null,
-        ~priorityRange=Js.Nullable.null,
-        ~log=Js.Nullable.null,
-        ~maxWaitingClients=Js.Nullable.null,
-        ~testOnBorrow=Js.Nullable.null,
-        ~acquireTimeoutMillis=Js.Nullable.null,
-        ~fifo=Js.Nullable.null,
-        ~autostart=Js.Nullable.null,
-        ~evictionRunIntervalMillis=Js.Nullable.null,
-        ~numTestsPerRun=Js.Nullable.null,
-        ~softIdleTimeoutMillis=Js.Nullable.null,
+        ~name=Js.Nullable.undefined,
+        ~min=Js.Nullable.undefined,
+        ~max=Js.Nullable.undefined,
+        ~refreshIdle=Js.Nullable.undefined,
+        ~idleTimeoutMillis=Js.Nullable.undefined,
+        ~reapIntervalMillis=Js.Nullable.undefined,
+        ~returnToHead=Js.Nullable.undefined,
+        ~priorityRange=Js.Nullable.undefined,
+        ~log=Js.Nullable.undefined,
+        ~maxWaitingClients=Js.Nullable.undefined,
+        ~testOnBorrow=Js.Nullable.undefined,
+        ~acquireTimeoutMillis=Js.Nullable.undefined,
+        ~fifo=Js.Nullable.undefined,
+        ~autostart=Js.Nullable.undefined,
+        ~evictionRunIntervalMillis=Js.Nullable.undefined,
+        ~numTestsPerRun=Js.Nullable.undefined,
+        ~softIdleTimeoutMillis=Js.Nullable.undefined,
         ()
       ) => {
     "name": name,
@@ -110,11 +110,11 @@ module Migrations = {
   };
   let make =
       (
-        ~database=Js.Nullable.null,
-        ~directory=Js.Nullable.null,
-        ~extension=Js.Nullable.null,
-        ~tableName=Js.Nullable.null,
-        ~disableTransactions=Js.Nullable.null,
+        ~database=Js.Nullable.undefined,
+        ~directory=Js.Nullable.undefined,
+        ~extension=Js.Nullable.undefined,
+        ~tableName=Js.Nullable.undefined,
+        ~disableTransactions=Js.Nullable.undefined,
         ()
       )
       : t => {
@@ -161,17 +161,17 @@ type t = {
 
 let make =
     (
-      ~debug=Js.Nullable.null,
-      ~client=Js.Nullable.null,
-      ~dialect=Js.Nullable.null,
-      ~version=Js.Nullable.null,
-      ~connection=Js.Nullable.null,
-      ~pool=Js.Nullable.null,
-      ~migrations=Js.Nullable.null,
-      ~seeds=Js.Nullable.null,
-      ~acquireConnectionTimeout=Js.Nullable.null,
-      ~useNullAsDefault=Js.Nullable.null,
-      ~searchPath=Js.Nullable.null,
+      ~debug=Js.Nullable.undefined,
+      ~client=Js.Nullable.undefined,
+      ~dialect=Js.Nullable.undefined,
+      ~version=Js.Nullable.undefined,
+      ~connection=Js.Nullable.undefined,
+      ~pool=Js.Nullable.undefined,
+      ~migrations=Js.Nullable.undefined,
+      ~seeds=Js.Nullable.undefined,
+      ~acquireConnectionTimeout=Js.Nullable.undefined,
+      ~useNullAsDefault=Js.Nullable.undefined,
+      ~searchPath=Js.Nullable.undefined,
       ()
     )
     : t => {
