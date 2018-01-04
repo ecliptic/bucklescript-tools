@@ -1,5 +1,10 @@
 {
   "name": "bs-knex",
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
   "sources": [
     {
       "dir": "src",

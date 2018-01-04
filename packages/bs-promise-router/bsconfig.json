@@ -1,5 +1,10 @@
 {
   "name": "bs-promise-router",
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
   "sources": [
     {
       "dir": "src",

@@ -1,5 +1,10 @@
 {
   "name": "bs-node-debug",
+  "package-specs": {
+    "module": "commonjs",
+    "in-source": true
+  },
+  "suffix": ".bs.js",
   "sources": [
     {
       "dir": "src",
