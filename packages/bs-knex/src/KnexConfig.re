@@ -11,29 +11,22 @@ module Connection = {
     "debug": Js.Nullable.t(Js.boolean),
     "requestTimeout": Js.Nullable.t(int)
   };
-  let make =
-      (
-        ~host,
-        ~port=Js.Nullable.undefined,
-        ~user,
-        ~password,
-        ~database,
-        ~domain=Js.Nullable.undefined,
-        ~instanceName=Js.Nullable.undefined,
-        ~debug=Js.Nullable.undefined,
-        ~requestTimeout=Js.Nullable.undefined,
-        ()
-      ) => {
-    "host": host,
-    "port": port,
-    "user": user,
-    "password": password,
-    "database": database,
-    "domain": domain,
-    "instanceName": instanceName,
-    "debug": debug,
-    "requestTimeout": requestTimeout
-  };
+  [@bs.obj]
+  external make :
+    (
+      ~host: string,
+      ~port: string=?,
+      ~user: string,
+      ~password: string,
+      ~database: string,
+      ~domain: string=?,
+      ~instanceName: string=?,
+      ~debug: Js.boolean=?,
+      ~requestTimeout: int=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 module Pool = {
@@ -58,45 +51,30 @@ module Pool = {
     "numTestsPerRun": Js.Nullable.t(int),
     "softIdleTimeoutMillis": Js.Nullable.t(int)
   };
-  let make =
-      (
-        ~name=Js.Nullable.undefined,
-        ~min=Js.Nullable.undefined,
-        ~max=Js.Nullable.undefined,
-        ~refreshIdle=Js.Nullable.undefined,
-        ~idleTimeoutMillis=Js.Nullable.undefined,
-        ~reapIntervalMillis=Js.Nullable.undefined,
-        ~returnToHead=Js.Nullable.undefined,
-        ~priorityRange=Js.Nullable.undefined,
-        ~log=Js.Nullable.undefined,
-        ~maxWaitingClients=Js.Nullable.undefined,
-        ~testOnBorrow=Js.Nullable.undefined,
-        ~acquireTimeoutMillis=Js.Nullable.undefined,
-        ~fifo=Js.Nullable.undefined,
-        ~autostart=Js.Nullable.undefined,
-        ~evictionRunIntervalMillis=Js.Nullable.undefined,
-        ~numTestsPerRun=Js.Nullable.undefined,
-        ~softIdleTimeoutMillis=Js.Nullable.undefined,
-        ()
-      ) => {
-    "name": name,
-    "min": min,
-    "max": max,
-    "refreshIdle": refreshIdle,
-    "idleTimeoutMillis": idleTimeoutMillis,
-    "reapIntervalMillis": reapIntervalMillis,
-    "returnToHead": returnToHead,
-    "priorityRange": priorityRange,
-    "log": log,
-    "maxWaitingClients": maxWaitingClients,
-    "testOnBorrow": testOnBorrow,
-    "acquireTimeoutMillis": acquireTimeoutMillis,
-    "fifo": fifo,
-    "autostart": autostart,
-    "evictionRunIntervalMillis": evictionRunIntervalMillis,
-    "numTestsPerRun": numTestsPerRun,
-    "softIdleTimeoutMillis": softIdleTimeoutMillis
-  };
+  [@bs.obj]
+  external make :
+    (
+      ~name: string=?,
+      ~min: int=?,
+      ~max: int=?,
+      ~refreshIdle: Js.boolean=?,
+      ~idleTimeoutMillis: int=?,
+      ~reapIntervalMillis: int=?,
+      ~returnToHead: Js.boolean=?,
+      ~priorityRange: int=?,
+      ~log: Js.boolean=?,
+      ~maxWaitingClients: int=?,
+      ~testOnBorrow: Js.boolean=?,
+      ~acquireTimeoutMillis: int=?,
+      ~fifo: Js.boolean=?,
+      ~autostart: Js.boolean=?,
+      ~evictionRunIntervalMillis: int=?,
+      ~numTestsPerRun: int=?,
+      ~softIdleTimeoutMillis: int=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 module Migrations = {
@@ -108,22 +86,18 @@ module Migrations = {
     "tableName": Js.Nullable.t(string),
     "disableTransactions": Js.Nullable.t(bool)
   };
-  let make =
-      (
-        ~database=Js.Nullable.undefined,
-        ~directory=Js.Nullable.undefined,
-        ~extension=Js.Nullable.undefined,
-        ~tableName=Js.Nullable.undefined,
-        ~disableTransactions=Js.Nullable.undefined,
-        ()
-      )
-      : t => {
-    "database": database,
-    "directory": directory,
-    "extension": extension,
-    "tableName": tableName,
-    "disableTransactions": disableTransactions
-  };
+  [@bs.obj]
+  external make :
+    (
+      ~database: string=?,
+      ~directory: string=?,
+      ~extension: string=?,
+      ~tableName: string=?,
+      ~disableTransactions: Js.boolean=?,
+      unit
+    ) =>
+    t =
+    "";
 };
 
 module Db = {
@@ -159,31 +133,21 @@ type t = {
   "searchPath": Js.Nullable.t(string)
 };
 
-let make =
-    (
-      ~debug=Js.Nullable.undefined,
-      ~client=Js.Nullable.undefined,
-      ~dialect=Js.Nullable.undefined,
-      ~version=Js.Nullable.undefined,
-      ~connection=Js.Nullable.undefined,
-      ~pool=Js.Nullable.undefined,
-      ~migrations=Js.Nullable.undefined,
-      ~seeds=Js.Nullable.undefined,
-      ~acquireConnectionTimeout=Js.Nullable.undefined,
-      ~useNullAsDefault=Js.Nullable.undefined,
-      ~searchPath=Js.Nullable.undefined,
-      ()
-    )
-    : t => {
-  "debug": debug,
-  "client": client,
-  "dialect": dialect,
-  "version": version,
-  "connection": connection,
-  "pool": pool,
-  "migrations": migrations,
-  "seeds": seeds,
-  "acquireConnectionTimeout": acquireConnectionTimeout,
-  "useNullAsDefault": useNullAsDefault,
-  "searchPath": searchPath
-};
+[@bs.obj]
+external make :
+  (
+    ~debug: string=?,
+    ~client: string=?,
+    ~dialect: string=?,
+    ~version: string=?,
+    ~connection: Connection.t=?,
+    ~pool: Pool.t=?,
+    ~migrations: Migrations.t=?,
+    ~seeds: seeds=?,
+    ~acquireConnectionTimeout: int=?,
+    ~useNullAsDefault: Js.boolean=?,
+    ~searchPath: string=?,
+    unit
+  ) =>
+  t =
+  "";
