@@ -1,9 +1,26 @@
 'use strict';
 
 
-var Connection = /* module */[];
+function make(host, user, password, database, $staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, _) {
+  var domain = $staropt$star ? $staropt$star[0] : null;
+  var instanceName = $staropt$star$1 ? $staropt$star$1[0] : null;
+  var debug = $staropt$star$2 ? $staropt$star$2[0] : null;
+  var requestTimeout = $staropt$star$3 ? $staropt$star$3[0] : null;
+  return {
+          host: host,
+          user: user,
+          password: password,
+          database: database,
+          domain: domain,
+          instanceName: instanceName,
+          debug: debug,
+          requestTimeout: requestTimeout
+        };
+}
 
-function make($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, $staropt$star$5, $staropt$star$6, $staropt$star$7, $staropt$star$8, $staropt$star$9, $staropt$star$10, $staropt$star$11, $staropt$star$12, $staropt$star$13, $staropt$star$14, $staropt$star$15, $staropt$star$16, _) {
+var Connection = /* module */[/* make */make];
+
+function make$1($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, $staropt$star$5, $staropt$star$6, $staropt$star$7, $staropt$star$8, $staropt$star$9, $staropt$star$10, $staropt$star$11, $staropt$star$12, $staropt$star$13, $staropt$star$14, $staropt$star$15, $staropt$star$16, _) {
   var name = $staropt$star ? $staropt$star[0] : null;
   var min = $staropt$star$1 ? $staropt$star$1[0] : null;
   var max = $staropt$star$2 ? $staropt$star$2[0] : null;
@@ -42,9 +59,9 @@ function make($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, 
         };
 }
 
-var Pool = /* module */[/* make */make];
+var Pool = /* module */[/* make */make$1];
 
-function make$1($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, _) {
+function make$2($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, _) {
   var database = $staropt$star ? $staropt$star[0] : null;
   var directory = $staropt$star$1 ? $staropt$star$1[0] : null;
   var extension = $staropt$star$2 ? $staropt$star$2[0] : null;
@@ -59,11 +76,11 @@ function make$1($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3
         };
 }
 
-var Migrations = /* module */[/* make */make$1];
+var Migrations = /* module */[/* make */make$2];
 
 var Db = /* module */[];
 
-function make$2($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, $staropt$star$5, $staropt$star$6, $staropt$star$7, $staropt$star$8, $staropt$star$9, $staropt$star$10, _) {
+function make$3($staropt$star, $staropt$star$1, $staropt$star$2, $staropt$star$3, $staropt$star$4, $staropt$star$5, $staropt$star$6, $staropt$star$7, $staropt$star$8, $staropt$star$9, $staropt$star$10, _) {
   var debug = $staropt$star ? $staropt$star[0] : null;
   var client = $staropt$star$1 ? $staropt$star$1[0] : null;
   var dialect = $staropt$star$2 ? $staropt$star$2[0] : null;
@@ -94,5 +111,5 @@ exports.Connection = Connection;
 exports.Pool       = Pool;
 exports.Migrations = Migrations;
 exports.Db         = Db;
-exports.make       = make$2;
+exports.make       = make$3;
 /* No side effect */

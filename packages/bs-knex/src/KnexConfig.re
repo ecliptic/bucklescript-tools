@@ -10,6 +10,27 @@ module Connection = {
     "debug": Js.Nullable.t(Js.boolean),
     "requestTimeout": Js.Nullable.t(int)
   };
+  let make =
+      (
+        ~host,
+        ~user,
+        ~password,
+        ~database,
+        ~domain=Js.Nullable.null,
+        ~instanceName=Js.Nullable.null,
+        ~debug=Js.Nullable.null,
+        ~requestTimeout=Js.Nullable.null,
+        ()
+      ) => {
+    "host": host,
+    "user": user,
+    "password": password,
+    "database": database,
+    "domain": domain,
+    "instanceName": instanceName,
+    "debug": debug,
+    "requestTimeout": requestTimeout
+  };
 };
 
 module Pool = {
