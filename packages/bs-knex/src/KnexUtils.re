@@ -7,7 +7,7 @@ let debug = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils");
 
 let debugExn = Debug.make(getEnvVar("KNEX_DEBUG_PREFIX", "bs-knex"), "KnexUtils:exn");
 
-[@bs.module] external parseDbUrl : string => KnexConfig.db = "parse-database-url";
+[@bs.module] external parseDbUrl : string => KnexConfig.Db.t = "parse-database-url";
 
 [@bs.new] external makeError : string => exn = "Error";
 
