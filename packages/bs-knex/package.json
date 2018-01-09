@@ -1,6 +1,6 @@
 {
   "name": "bs-knex",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "BuckleScript interface to the node 'knex' library",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,14 @@
     "type": "git",
     "url": "git+https://github.com/ecliptic/bucklescript-tools.git"
   },
-  "keywords": ["bucklescript", "reason", "node", "database", "sql", "knex"],
+  "keywords": [
+    "bucklescript",
+    "reason",
+    "node",
+    "database",
+    "sql",
+    "knex"
+  ],
   "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
   "license": "BSD-2-Clause",
   "bugs": {
@@ -57,12 +64,22 @@
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom"
     ],
-    "testMatch": ["**/?(*)(Spec|Test).bs.js"],
-    "testPathIgnorePatterns": ["/node_modules/"],
+    "testMatch": [
+      "**/?(*)(Spec|Test).bs.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "src/**/*.js": ["format", "git add"],
-    "src/**/*.re": ["format.re", "git add"]
+    "src/**/*.js": [
+      "format",
+      "git add"
+    ],
+    "src/**/*.re": [
+      "format.re",
+      "git add"
+    ]
   }
 }
