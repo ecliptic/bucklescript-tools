@@ -11,7 +11,7 @@
       "subdirs": true
     }
   ],
-  "bs-dependencies": ["bs-node-debug"],
+  "bs-dependencies": ["bs-node-debug", "bs-jest"],
   "reason": {
     "react-jsx": 2
   },

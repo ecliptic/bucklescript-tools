@@ -2,6 +2,10 @@
 
 var Js_null_undefined = require("bs-platform/lib/js/js_null_undefined.js");
 
+function fromTable(string, knex) {
+  return knex(string);
+}
+
 function insert($staropt$star, data) {
   var returning = $staropt$star ? $staropt$star[0] : /* Some */["*"];
   var partial_arg = Js_null_undefined.from_opt(returning);
@@ -28,8 +32,9 @@ function del($staropt$star, data) {
 
 var $$delete = del;
 
-exports.insert   = insert;
-exports.update   = update;
-exports.del      = del;
-exports.$$delete = $$delete;
+exports.fromTable = fromTable;
+exports.insert    = insert;
+exports.update    = update;
+exports.del       = del;
+exports.$$delete  = $$delete;
 /* No side effect */

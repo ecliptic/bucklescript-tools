@@ -14,15 +14,16 @@ module Connection = {
   [@bs.obj]
   external make :
     (
-      ~host: string,
+      ~host: string=?,
       ~port: string=?,
-      ~user: string,
-      ~password: string,
-      ~database: string,
+      ~user: string=?,
+      ~password: string=?,
+      ~database: string=?,
       ~domain: string=?,
       ~instanceName: string=?,
       ~debug: Js.boolean=?,
       ~requestTimeout: int=?,
+      ~filename: string=?,
       unit
     ) =>
     t =
@@ -135,6 +136,25 @@ type t = {
 
 [@bs.obj]
 external make :
+  (
+    ~debug: string=?,
+    ~client: string=?,
+    ~dialect: string=?,
+    ~version: string=?,
+    ~connection: Connection.t=?,
+    ~pool: Pool.t=?,
+    ~migrations: Migrations.t=?,
+    ~seeds: seeds=?,
+    ~acquireConnectionTimeout: int=?,
+    ~useNullAsDefault: Js.boolean=?,
+    ~searchPath: string=?,
+    unit
+  ) =>
+  t =
+  "";
+
+[@bs.obj]
+external makeStringConnection :
   (
     ~debug: string=?,
     ~client: string=?,

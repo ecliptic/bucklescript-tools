@@ -1,12 +1,21 @@
 type queryBuilder;
 
-type t = string => queryBuilder;
+type t = [@bs] (string => queryBuilder);
+
+type querySql('options) = {
+  .
+  "method": string, "options": 'options, "bindings": array(string), "sql": string
+};
+
+let fromTable = (string, knex: t) => [@bs] knex(string);
 
 external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
 [@bs.module] external make : KnexConfig.t => t = "knex";
 
-[@bs.send] external raw : (t, string) => Js.Promise.t('b) = "";
+[@bs.send.pipe : queryBuilder] external raw : string => Js.Promise.t('b) = "";
+
+[@bs.send.pipe : queryBuilder] external toSQL : unit => querySql('options) = "";
 
 /* QueryBuilder Interface */
 [@bs.send.pipe : queryBuilder] external select : 'a => queryBuilder = "";

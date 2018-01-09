@@ -1,7 +1,7 @@
 'use strict';
 
 var Curry        = require("bs-platform/lib/js/curry.js");
-var Debug        = require("bs-node-debug/src/Debug.bs.js");
+var Debug        = require("bs-node-debug/src/Debug.js");
 var Process      = require("process");
 var Js_option    = require("bs-platform/lib/js/js_option.js");
 var Caml_array   = require("bs-platform/lib/js/caml_array.js");

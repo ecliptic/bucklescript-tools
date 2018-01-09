@@ -1,6 +1,6 @@
 {
   "name": "bs-knex",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "BuckleScript interface to the node 'knex' library",
   "main": "index.js",
   "scripts": {
@@ -34,11 +34,11 @@
   },
   "homepage": "https://github.com/ecliptic/bucklescript-tools#readme",
   "dependencies": {
+    "bs-jest": "^0.3.2",
     "bs-node-debug": "^0.1.0",
     "knex": "^0.14.2"
   },
   "devDependencies": {
-    "bs-jest": "^0.2.0",
     "bs-loader": "^2.0.0",
     "bs-platform": "2.0.0",
     "cross-env": "^5.1.1",
@@ -55,26 +55,22 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
     "lint-staged": "^4.3.0",
-    "prettier-eslint-cli": "^4.4.0"
+    "prettier-eslint-cli": "^4.4.0",
+    "sqlite3": "^3.1.13"
   },
   "jest": {
-    "moduleFileExtensions": [
-      "re",
-      "js",
-      "ml"
-    ],
     "testURL": "http://localhost",
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga|css)$": "identity-obj-proxy"
-    },
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom"
     ],
-    "transform": {
-      ".(re|ml)": "bs-loader",
-      ".*": "babel-jest"
-    }
+    "testMatch": [
+      "**/?(*)(Spec|Test).bs.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testEnvironment": "node"
   },
   "lint-staged": {
     "src/**/*.js": [
