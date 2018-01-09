@@ -13,7 +13,7 @@ external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
 [@bs.module] external make : KnexConfig.t => t = "knex";
 
-[@bs.send.pipe : queryBuilder] external raw : string => Js.Promise.t('b) = "";
+[@bs.send.pipe : t] external raw : string => Js.Promise.t('b) = "";
 
 [@bs.send.pipe : queryBuilder] external toSQL : unit => querySql('options) = "";
 
