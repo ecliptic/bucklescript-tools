@@ -3,7 +3,7 @@
 var Debug = require("debug");
 
 function make(prefix, label) {
-  var log = Debug(prefix + ":" + label);
+  var log = Debug(prefix + (":" + label));
   return (function (message) {
       return log(message);
     });

@@ -1,8 +1,8 @@
 'use strict';
 
-var Jest = require("@glennsl/bs-jest/src/jest.js");
-var Knex = require("./Knex.bs.js");
-var Make = require("knex");
+var Jest   = require("@glennsl/bs-jest/src/jest.js");
+var Knex   = require("./Knex.bs.js");
+var Knex$1 = require("knex");
 
 var connection = {
   filename: ":memory:"
@@ -15,7 +15,7 @@ var config = {
 
 describe("Knex", (function () {
         describe("queryBuilder", (function () {
-                var knex = Make(config);
+                var knex = Knex$1(config);
                 Jest.test("returns the correct sql", (function () {
                         var sql = Knex.fromTable("users", knex).where({
                                 id: "awesome"
