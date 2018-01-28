@@ -1,6 +1,6 @@
 {
   "name": "bs-chalk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "BuckleScript interface to the node 'chalk' library",
   "main": "index.js",
   "scripts": {
