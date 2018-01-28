@@ -211,6 +211,9 @@ external updateSet : (string, 'a, Js.Nullable.t(string)) => queryBuilder =
 
 [@bs.send.pipe : queryBuilder] external clone : unit => queryBuilder = "";
 
+/* Transactions */
+[@bs.send.pipe : t] external transaction : (queryBuilder => Js.Promise.t('a)) => 'b = "";
+
 /* Convenience Functions */
 let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.from_opt(returning));
 
