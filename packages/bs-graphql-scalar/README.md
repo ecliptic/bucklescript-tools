@@ -1,7 +1,7 @@
 # bs-graphql-scalar
 
-[![version](https://img.shields.io/npm/v/bs-knex.svg)](http://npm.im/bs-knex)
-[![downloads](https://img.shields.io/npm/dt/bt-knex.svg)](http://npm.im/bs-knex)
+[![version](https://img.shields.io/npm/v/bs-graphql-scalar.svg)](http://npm.im/bs-graphql-scalar)
+[![downloads](https://img.shields.io/npm/dt/bs-graphql-scalar.svg)](http://npm.im/bs-graphql-scalar)
 [![license](https://img.shields.io/npm/l/express.svg)](LICENSE)
 
 BuckleScript utilities for creating new GraphQL scalar types.
