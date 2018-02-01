@@ -9,9 +9,15 @@
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "tests",
+      "subdirs": true,
+      "type": "dev"
     }
   ],
-  "bs-dependencies": ["bs-node-debug", "@glennsl/bs-jest"],
+  "bs-dependencies": ["bs-node-debug"],
+  "bs-dev-dependencies": ["@glennsl/bs-jest"],
   "reason": {
     "react-jsx": 2
   },

@@ -8,7 +8,6 @@
     "prepush": "yarn build && yarn test",
     "test": "cross-env NODE_ENV=test jest",
     "test.watch": "cross-env NODE_ENV=test jest --watch",
-    "format.js": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "format.re": "refmt --in-place src/**/*.re",
     "lint": "eslint --ext .js,.jsx ./",
     "build": "bsb -make-world",
@@ -55,7 +54,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.1.1",
     "lint-staged": "^6.0.0",
-    "prettier-eslint-cli": "^4.7.0",
     "sqlite3": "^3.1.13"
   },
   "jest": {
@@ -65,7 +63,7 @@
       "<rootDir>/node_modules/react-dom"
     ],
     "testMatch": [
-      "**/?(*)(Spec|Test).bs.js"
+      "<rootDir>/tests/**/?(*)(Spec|Test).bs.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
@@ -74,7 +72,6 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "format",
       "git add"
     ],
     "src/**/*.re": [

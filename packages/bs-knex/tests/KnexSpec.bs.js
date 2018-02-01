@@ -1,7 +1,7 @@
 'use strict';
 
 var Jest   = require("@glennsl/bs-jest/src/jest.js");
-var Knex   = require("./Knex.bs.js");
+var Knex   = require("../src/Knex.bs.js");
 var Knex$1 = require("knex");
 
 var connection = {
