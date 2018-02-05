@@ -1,6 +1,6 @@
 {
   "name": "bs-knex",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "BuckleScript interface to the node 'knex' library",
   "main": "index.js",
   "scripts": {

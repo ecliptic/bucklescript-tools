@@ -39,21 +39,88 @@ external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
 [@bs.send.pipe : queryBuilder] external joinRaw : 'a => queryBuilder = "";
 
-[@bs.send.pipe : queryBuilder] external innerJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external innerJoin : (string, string, string) => queryBuilder = "";
 
-[@bs.send.pipe : queryBuilder] external leftJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder]
+external innerJoinOp : (string, string, string, string) => queryBuilder =
+  "innerJoin";
 
-[@bs.send.pipe : queryBuilder] external leftOuterJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder]
+external innerJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "innerJoin";
 
-[@bs.send.pipe : queryBuilder] external rightJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external leftJoin : (string, string, string) => queryBuilder = "";
 
-[@bs.send.pipe : queryBuilder] external rightOuterJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder]
+external leftJoinOp : (string, string, string, string) => queryBuilder =
+  "leftJoin";
 
-[@bs.send.pipe : queryBuilder] external outerJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder]
+external leftJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "leftJoin";
 
-[@bs.send.pipe : queryBuilder] external fullOuterJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external leftOuterJoin : (string, string, string) => queryBuilder =
+  "";
 
-[@bs.send.pipe : queryBuilder] external crossJoin : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder]
+external leftOuterJoinOp : (string, string, string, string) => queryBuilder =
+  "leftOuterJoin";
+
+[@bs.send.pipe : queryBuilder]
+external leftOuterJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "leftOuterJoin";
+
+[@bs.send.pipe : queryBuilder] external rightJoin : (string, string, string) => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder]
+external rightJoinOp : (string, string, string, string) => queryBuilder =
+  "rightJoin";
+
+[@bs.send.pipe : queryBuilder]
+external rightJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "rightJoin";
+
+[@bs.send.pipe : queryBuilder] external rightOuterJoin : (string, string, string) => queryBuilder =
+  "";
+
+[@bs.send.pipe : queryBuilder]
+external rightOuterJoinOp : (string, string, string, string) => queryBuilder =
+  "rightOuterJoin";
+
+[@bs.send.pipe : queryBuilder]
+external rightOuterJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "rightOuterJoin";
+
+[@bs.send.pipe : queryBuilder] external outerJoin : (string, string, string) => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder]
+external outerJoinOp : (string, string, string, string) => queryBuilder =
+  "outerJoin";
+
+[@bs.send.pipe : queryBuilder]
+external outerJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "outerJoin";
+
+[@bs.send.pipe : queryBuilder] external fullOuterJoin : (string, string, string) => queryBuilder =
+  "";
+
+[@bs.send.pipe : queryBuilder]
+external fullOuterJoinOp : (string, string, string, string) => queryBuilder =
+  "fullOuterJoin";
+
+[@bs.send.pipe : queryBuilder]
+external fullOuterJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "fullOuterJoin";
+
+[@bs.send.pipe : queryBuilder] external crossJoin : (string, string, string) => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder]
+external crossJoinOp : (string, string, string, string) => queryBuilder =
+  "crossJoin";
+
+[@bs.send.pipe : queryBuilder]
+external crossJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
+  "crossJoin";
 
 /* Withs */
 [@bs.send.pipe : queryBuilder] external with_ : 'a => queryBuilder = "with";
