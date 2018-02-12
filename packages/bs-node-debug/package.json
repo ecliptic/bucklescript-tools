@@ -8,7 +8,6 @@
     "prepush": "yarn build && yarn test",
     "test": "cross-env NODE_ENV=test jest",
     "test.watch": "cross-env NODE_ENV=test jest --watch",
-    "format.js": "prettier-eslint --write \"packages/*/src/**/*.js\"",
     "format.re": "refmt --in-place src/**/*.re",
     "lint": "eslint --ext .js,.jsx ./",
     "build": "bsb -make-world",
@@ -51,8 +50,7 @@
     "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^21.2.1",
-    "lint-staged": "^4.3.0",
-    "prettier-eslint-cli": "^4.4.0"
+    "lint-staged": "^4.3.0"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -74,10 +72,6 @@
     }
   },
   "lint-staged": {
-    "src/**/*.js": [
-      "format",
-      "git add"
-    ],
     "src/**/*.re": [
       "format.re",
       "git add"

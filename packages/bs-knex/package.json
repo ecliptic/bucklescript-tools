@@ -70,11 +70,8 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "src/**/*.js": [
-      "git add"
-    ],
     "src/**/*.re": [
-      "format.re",
+      "refmt --in-place",
       "git add"
     ]
   }
