@@ -1,0 +1,55 @@
+{
+  "name": "bs-react-redux",
+  "version": "2.0.0",
+  "description": "An idiomatic way to interop with Redux with the type safety of Reason",
+  "main": "index.js",
+  "scripts": {
+    "prepush": "yarn build",
+    "build": "bsb -make-world",
+    "build.watch": "yarn build -w",
+    "build.clean": "bsb -clean-world"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecliptic/bucklescript-tools.git"
+  },
+  "keywords": [
+    "bucklescript",
+    "reason",
+    "react",
+    "redux",
+    "state"
+  ],
+  "author": "Brandon Konkle <brandon@ecliptic.io> (http://ecliptic.io)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ecliptic/bucklescript-tools/issues"
+  },
+  "homepage": "https://github.com/ecliptic/bucklescript-tools#readme",
+  "dependencies": {
+    "react-redux": "^5.0.7",
+    "reason-react": "^0.3.2",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "bs-platform": "2.1.0",
+    "cross-env": "^5.1.3",
+    "eslint": "^4.15.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0"
+  },
+  "lint-staged": {
+    "src/**/*.re": [
+      "refmt --in-place",
+      "git add"
+    ]
+  }
+}

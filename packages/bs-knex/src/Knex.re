@@ -196,7 +196,9 @@ external crossJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
 [@bs.send.pipe : queryBuilder] external groupByRaw : 'a => queryBuilder = "";
 
 /* Order By */
-[@bs.send.pipe : queryBuilder] external orderBy : 'a => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external orderBy : string => queryBuilder = "";
+
+[@bs.send.pipe : queryBuilder] external orderBy2 : (string, string) => queryBuilder = "";
 
 [@bs.send.pipe : queryBuilder] external orderByRaw : 'a => queryBuilder = "";
 
