@@ -48,12 +48,15 @@ let objToJson = (obj: Js.t('a)) : Js.Json.t =>
     )
   );
 
-/*
+
+/***
  * Pass-through error handlers - handles a specific error, letting all the rest flow through to the
  * next handler.
  */
-/** Handles errors for the specified unique constraint */
-let handleUniqueError = (~name: string, ~message: string, promise) =>
+/**
+ * Catch unique errors and pass the exception to a handler function that should return a promise
+ */
+let catchUniqueError = (~name: string, ~handle, promise) =>
   Js.Nullable.(
     promise
     |> catch(
@@ -67,7 +70,7 @@ let handleUniqueError = (~name: string, ~message: string, promise) =>
                switch constraintOpt {
                | Some(constraintName) =>
                  if (constraintName === name) {
-                   reject(makeError(message))
+                   handle(exn)
                  } else {
                    continue
                  }
@@ -82,8 +85,15 @@ let handleUniqueError = (~name: string, ~message: string, promise) =>
        )
   );
 
-/*
- * Terminator error handler - handles all remaining unhandled DB errors
+/**
+ * Handles errors for the specified unique constraint
+ */
+let handleUniqueError = (~name: string, ~message: string) =>
+  catchUniqueError(~name, ~handle=(_exn) => reject(makeError(message)));
+
+
+/***
+ * Terminator error handlers - handles all remaining unhandled DB errors
  */
 /** Handle generic database errors */
 let handleDbErrors = (promise) =>

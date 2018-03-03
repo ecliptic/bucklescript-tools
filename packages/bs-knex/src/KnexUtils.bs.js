@@ -30,7 +30,7 @@ function objToJson(obj) {
                   }), Js_primitive.undefined_to_opt(JSON.stringify(obj))));
 }
 
-function handleUniqueError(name, message, promise) {
+function catchUniqueError(name, handle, promise) {
   return promise.catch((function (exn) {
                 var $$continue = Promise.reject(exn);
                 var codeOpt = exn.code;
@@ -39,7 +39,7 @@ function handleUniqueError(name, message, promise) {
                 } else if (codeOpt === uniqueViolation) {
                   var constraintOpt = exn.constraint;
                   if (!(constraintOpt == null) && constraintOpt === name) {
-                    return Promise.reject(new Error(message));
+                    return Curry._1(handle, exn);
                   } else {
                     return $$continue;
                   }
@@ -47,6 +47,14 @@ function handleUniqueError(name, message, promise) {
                   return $$continue;
                 }
               }));
+}
+
+function handleUniqueError(name, message) {
+  return (function (param) {
+      return catchUniqueError(name, (function () {
+                    return Promise.reject(new Error(message));
+                  }), param);
+    });
 }
 
 function handleDbErrors(promise) {
@@ -95,6 +103,7 @@ exports.debugExn                  = debugExn;
 exports.invalidTextRepresentation = invalidTextRepresentation;
 exports.uniqueViolation           = uniqueViolation;
 exports.objToJson                 = objToJson;
+exports.catchUniqueError          = catchUniqueError;
 exports.handleUniqueError         = handleUniqueError;
 exports.handleDbErrors            = handleDbErrors;
 exports.decodeResults             = decodeResults;
