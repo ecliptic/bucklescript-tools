@@ -254,7 +254,7 @@ external crossJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
 /* Others */
 [@bs.send.pipe : queryBuilder] external first : 'a => queryBuilder = "";
 
-[@bs.send.pipe : queryBuilder] external debug : Js.boolean => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external debug : bool => queryBuilder = "";
 
 [@bs.send.pipe : queryBuilder] external pluck : string => queryBuilder = "";
 
@@ -284,10 +284,10 @@ external updateSet : (string, 'a, Js.Nullable.t(string)) => queryBuilder =
 [@bs.send.pipe : t] external transaction : (queryBuilder => Js.Promise.t('a)) => 'b = "";
 
 /* Convenience Functions */
-let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.from_opt(returning));
+let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.fromOption(returning));
 
-let update = (~returning=Some("*"), data) => update_(data, Js.Nullable.from_opt(returning));
+let update = (~returning=Some("*"), data) => update_(data, Js.Nullable.fromOption(returning));
 
-let del = (~returning=Some("*"), data) => del_(data, Js.Nullable.from_opt(returning));
+let del = (~returning=Some("*"), data) => del_(data, Js.Nullable.fromOption(returning));
 
 let delete = del;

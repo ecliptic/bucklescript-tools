@@ -1,7 +1,7 @@
 'use strict';
 
-var Jest   = require("@glennsl/bs-jest/src/jest.js");
-var Knex   = require("../src/Knex.bs.js");
+var Jest = require("@glennsl/bs-jest/src/jest.js");
+var Knex = require("../src/Knex.bs.js");
 var Knex$1 = require("knex");
 
 var connection = {
@@ -33,5 +33,5 @@ describe("Knex", (function () {
       }));
 
 exports.connection = connection;
-exports.config     = config;
+exports.config = config;
 /*  Not a pure module */
