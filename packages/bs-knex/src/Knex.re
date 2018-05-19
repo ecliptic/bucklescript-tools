@@ -262,7 +262,7 @@ external crossJoinFn : (string, queryBuilder => queryBuilder) => queryBuilder =
 /* Others */
 [@bs.send.pipe : queryBuilder] external first : 'a => queryBuilder = "";
 
-[@bs.send.pipe : queryBuilder] external debug : Js.boolean => queryBuilder = "";
+[@bs.send.pipe : queryBuilder] external debug : bool => queryBuilder = "";
 
 [@bs.send.pipe : queryBuilder] external pluck : string => queryBuilder = "";
 
