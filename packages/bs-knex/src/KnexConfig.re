@@ -8,7 +8,7 @@ module Connection = {
     "database": string,
     "domain": Js.Nullable.t(string),
     "instanceName": Js.Nullable.t(string),
-    "debug": Js.Nullable.t(Js.boolean),
+    "debug": Js.Nullable.t(bool),
     "requestTimeout": Js.Nullable.t(int)
   };
   [@bs.obj]
@@ -21,7 +21,7 @@ module Connection = {
       ~database: string=?,
       ~domain: string=?,
       ~instanceName: string=?,
-      ~debug: Js.boolean=?,
+      ~debug: bool=?,
       ~requestTimeout: int=?,
       ~filename: string=?,
       unit
@@ -36,18 +36,18 @@ module Pool = {
     "name": Js.Nullable.t(string),
     "min": Js.Nullable.t(int),
     "max": Js.Nullable.t(int),
-    "refreshIdle": Js.Nullable.t(Js.boolean),
+    "refreshIdle": Js.Nullable.t(bool),
     "idleTimeoutMillis": Js.Nullable.t(int),
     "reapIntervalMillis": Js.Nullable.t(int),
-    "returnToHead": Js.Nullable.t(Js.boolean),
+    "returnToHead": Js.Nullable.t(bool),
     "priorityRange": Js.Nullable.t(int),
-    "log": Js.Nullable.t(Js.boolean),
+    "log": Js.Nullable.t(bool),
     /* generic-pool v3 configs */
     "maxWaitingClients": Js.Nullable.t(int),
-    "testOnBorrow": Js.Nullable.t(Js.boolean),
+    "testOnBorrow": Js.Nullable.t(bool),
     "acquireTimeoutMillis": Js.Nullable.t(int),
-    "fifo": Js.Nullable.t(Js.boolean),
-    "autostart": Js.Nullable.t(Js.boolean),
+    "fifo": Js.Nullable.t(bool),
+    "autostart": Js.Nullable.t(bool),
     "evictionRunIntervalMillis": Js.Nullable.t(int),
     "numTestsPerRun": Js.Nullable.t(int),
     "softIdleTimeoutMillis": Js.Nullable.t(int)
@@ -58,17 +58,17 @@ module Pool = {
       ~name: string=?,
       ~min: int=?,
       ~max: int=?,
-      ~refreshIdle: Js.boolean=?,
+      ~refreshIdle: bool=?,
       ~idleTimeoutMillis: int=?,
       ~reapIntervalMillis: int=?,
-      ~returnToHead: Js.boolean=?,
+      ~returnToHead: bool=?,
       ~priorityRange: int=?,
-      ~log: Js.boolean=?,
+      ~log: bool=?,
       ~maxWaitingClients: int=?,
-      ~testOnBorrow: Js.boolean=?,
+      ~testOnBorrow: bool=?,
       ~acquireTimeoutMillis: int=?,
-      ~fifo: Js.boolean=?,
-      ~autostart: Js.boolean=?,
+      ~fifo: bool=?,
+      ~autostart: bool=?,
       ~evictionRunIntervalMillis: int=?,
       ~numTestsPerRun: int=?,
       ~softIdleTimeoutMillis: int=?,
@@ -94,7 +94,7 @@ module Migrations = {
       ~directory: string=?,
       ~extension: string=?,
       ~tableName: string=?,
-      ~disableTransactions: Js.boolean=?,
+      ~disableTransactions: bool=?,
       unit
     ) =>
     t =
@@ -112,8 +112,8 @@ module Db = {
     "port": Js.Nullable.t(string),
     "database": Js.Nullable.t(string),
     "filename": Js.Nullable.t(string),
-    "native": Js.Nullable.t(Js.boolean),
-    "reconnect": Js.Nullable.t(Js.boolean)
+    "native": Js.Nullable.t(bool),
+    "reconnect": Js.Nullable.t(bool)
   };
 };
 
@@ -146,7 +146,7 @@ external make :
     ~migrations: Migrations.t=?,
     ~seeds: seeds=?,
     ~acquireConnectionTimeout: int=?,
-    ~useNullAsDefault: Js.boolean=?,
+    ~useNullAsDefault: bool=?,
     ~searchPath: string=?,
     unit
   ) =>
@@ -165,7 +165,7 @@ external makeStringConnection :
     ~migrations: Migrations.t=?,
     ~seeds: seeds=?,
     ~acquireConnectionTimeout: int=?,
-    ~useNullAsDefault: Js.boolean=?,
+    ~useNullAsDefault: bool=?,
     ~searchPath: string=?,
     unit
   ) =>
