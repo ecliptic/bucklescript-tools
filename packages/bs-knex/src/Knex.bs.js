@@ -8,7 +8,7 @@ function fromTable(string, knex) {
 
 function insert($staropt$star, data) {
   var returning = $staropt$star ? $staropt$star[0] : /* Some */["*"];
-  var partial_arg = Js_null_undefined.from_opt(returning);
+  var partial_arg = Js_null_undefined.fromOption(returning);
   return (function (param) {
       return param.insert(data, partial_arg);
     });
@@ -16,7 +16,7 @@ function insert($staropt$star, data) {
 
 function update($staropt$star, data) {
   var returning = $staropt$star ? $staropt$star[0] : /* Some */["*"];
-  var partial_arg = Js_null_undefined.from_opt(returning);
+  var partial_arg = Js_null_undefined.fromOption(returning);
   return (function (param) {
       return param.update(data, partial_arg);
     });
@@ -24,7 +24,7 @@ function update($staropt$star, data) {
 
 function del($staropt$star, data) {
   var returning = $staropt$star ? $staropt$star[0] : /* Some */["*"];
-  var partial_arg = Js_null_undefined.from_opt(returning);
+  var partial_arg = Js_null_undefined.fromOption(returning);
   return (function (param) {
       return param.del(data, partial_arg);
     });
@@ -33,8 +33,8 @@ function del($staropt$star, data) {
 var $$delete = del;
 
 exports.fromTable = fromTable;
-exports.insert    = insert;
-exports.update    = update;
-exports.del       = del;
-exports.$$delete  = $$delete;
+exports.insert = insert;
+exports.update = update;
+exports.del = del;
+exports.$$delete = $$delete;
 /* No side effect */

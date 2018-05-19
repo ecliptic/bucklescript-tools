@@ -62,11 +62,11 @@ let catchUniqueError = (~name: string, ~handle, promise) =>
     |> catch(
          (exn) => {
            let continue = reject(Debug.toExn(exn));
-           let codeOpt = exn |> exnCode |> to_opt;
+           let codeOpt = exn |> exnCode |> toOption;
            switch codeOpt {
            | Some(code) =>
              if (code === uniqueViolation) {
-               let constraintOpt = exn |> exnConstraint |> to_opt;
+               let constraintOpt = exn |> exnConstraint |> toOption;
                switch constraintOpt {
                | Some(constraintName) =>
                  if (constraintName === name) {
@@ -101,13 +101,13 @@ let handleDbErrors = (promise) =>
     promise
     |> catch(
          (exn) => {
-           let codeOpt = exn |> exnCode |> to_opt;
+           let codeOpt = exn |> exnCode |> toOption;
            switch codeOpt {
            | Some(code) =>
              if (code === uniqueViolation) {
                reject(makeError("A unique constraint was violated."))
              } else if (code === invalidTextRepresentation) {
-               let routineOpt = exn |> exnRoutine |> to_opt;
+               let routineOpt = exn |> exnRoutine |> toOption;
                switch routineOpt {
                | Some(routine) =>
                  if (routine === "string_to_uuid") {
