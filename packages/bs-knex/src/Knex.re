@@ -15,6 +15,14 @@ external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
 [@bs.send.pipe : t] external raw : string => Js.Promise.t('b) = "";
 
+[@bs.send.pipe : t] external rawExpression : string => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBinding : (string, 'a) => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBindingsArray : (string, array('a)) => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBindingsNamed : (string, Js.t('a)) => 'b = "raw";
+
 [@bs.send.pipe : queryBuilder] external toSQL : unit => querySql('options) = "";
 
 /* QueryBuilder Interface */
