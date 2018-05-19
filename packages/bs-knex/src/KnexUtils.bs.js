@@ -1,10 +1,10 @@
 'use strict';
 
-var Curry        = require("bs-platform/lib/js/curry.js");
-var Debug        = require("bs-node-debug/src/Debug.bs.js");
-var Process      = require("process");
-var Js_option    = require("bs-platform/lib/js/js_option.js");
-var Caml_array   = require("bs-platform/lib/js/caml_array.js");
+var Curry = require("bs-platform/lib/js/curry.js");
+var Debug = require("bs-node-debug/src/Debug.bs.js");
+var Process = require("process");
+var Js_option = require("bs-platform/lib/js/js_option.js");
+var Caml_array = require("bs-platform/lib/js/caml_array.js");
 var Js_primitive = require("bs-platform/lib/js/js_primitive.js");
 
 function getEnvVar(key, fallback) {
@@ -34,17 +34,15 @@ function catchUniqueError(name, handle, promise) {
   return promise.catch((function (exn) {
                 var $$continue = Promise.reject(exn);
                 var codeOpt = exn.code;
-                if (codeOpt == null) {
+                if ((codeOpt == null) || codeOpt !== uniqueViolation) {
                   return $$continue;
-                } else if (codeOpt === uniqueViolation) {
+                } else {
                   var constraintOpt = exn.constraint;
                   if (!(constraintOpt == null) && constraintOpt === name) {
                     return Curry._1(handle, exn);
                   } else {
                     return $$continue;
                   }
-                } else {
-                  return $$continue;
                 }
               }));
 }
@@ -97,16 +95,16 @@ function pickFirst(results) {
   return Promise.resolve(Caml_array.caml_array_get(results, 0));
 }
 
-exports.getEnvVar                 = getEnvVar;
-exports.debug                     = debug;
-exports.debugExn                  = debugExn;
+exports.getEnvVar = getEnvVar;
+exports.debug = debug;
+exports.debugExn = debugExn;
 exports.invalidTextRepresentation = invalidTextRepresentation;
-exports.uniqueViolation           = uniqueViolation;
-exports.objToJson                 = objToJson;
-exports.catchUniqueError          = catchUniqueError;
-exports.handleUniqueError         = handleUniqueError;
-exports.handleDbErrors            = handleDbErrors;
-exports.decodeResults             = decodeResults;
-exports.rejectIfEmpty             = rejectIfEmpty;
-exports.pickFirst                 = pickFirst;
+exports.uniqueViolation = uniqueViolation;
+exports.objToJson = objToJson;
+exports.catchUniqueError = catchUniqueError;
+exports.handleUniqueError = handleUniqueError;
+exports.handleDbErrors = handleDbErrors;
+exports.decodeResults = decodeResults;
+exports.rejectIfEmpty = rejectIfEmpty;
+exports.pickFirst = pickFirst;
 /* debug Not a pure module */

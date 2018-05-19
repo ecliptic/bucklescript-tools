@@ -556,9 +556,9 @@ bs-platform@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.0.0.tgz#17ee607fa829f67b8b920438ebca5ec1deab3276"
 
-bs-platform@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.1.0.tgz#63560ff8f7142c9c0631559df1c35590b9f6d8b2"
+bs-platform@^2.2.0:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/bs-platform/-/bs-platform-2.2.3.tgz#d905ae10a5f3621e6a739041dfa0b58483a2174f"
 
 bsb-js@^1.0.0:
   version "1.0.1"

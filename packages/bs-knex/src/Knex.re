@@ -15,6 +15,14 @@ external toPromise : queryBuilder => Js.Promise.t('a) = "%identity";
 
 [@bs.send.pipe : t] external raw : string => Js.Promise.t('b) = "";
 
+[@bs.send.pipe : t] external rawExpression : string => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBinding : (string, 'a) => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBindingsArray : (string, array('a)) => 'b = "raw";
+
+[@bs.send.pipe : t] external rawBindingsNamed : (string, Js.t('a)) => 'b = "raw";
+
 [@bs.send.pipe : queryBuilder] external toSQL : unit => querySql('options) = "";
 
 /* QueryBuilder Interface */
@@ -284,10 +292,10 @@ external updateSet : (string, 'a, Js.Nullable.t(string)) => queryBuilder =
 [@bs.send.pipe : t] external transaction : (queryBuilder => Js.Promise.t('a)) => 'b = "";
 
 /* Convenience Functions */
-let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.from_opt(returning));
+let insert = (~returning=Some("*"), data) => insert_(data, Js.Nullable.fromOption(returning));
 
-let update = (~returning=Some("*"), data) => update_(data, Js.Nullable.from_opt(returning));
+let update = (~returning=Some("*"), data) => update_(data, Js.Nullable.fromOption(returning));
 
-let del = (~returning=Some("*"), data) => del_(data, Js.Nullable.from_opt(returning));
+let del = (~returning=Some("*"), data) => del_(data, Js.Nullable.fromOption(returning));
 
 let delete = del;

@@ -160,7 +160,7 @@ external makeStringConnection :
     ~client: string=?,
     ~dialect: string=?,
     ~version: string=?,
-    ~connection: Connection.t=?,
+    ~connection: string=?,
     ~pool: Pool.t=?,
     ~migrations: Migrations.t=?,
     ~seeds: seeds=?,
